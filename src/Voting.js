@@ -197,6 +197,8 @@ const VotingDApp = () => {
         </div>
       )}
 
+      <h3>Your account: {account}</h3>
+
       {loading ? (
         <p>Loading...</p>
       ) : (
