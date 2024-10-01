@@ -208,8 +208,12 @@
   ],
   "networks": {
     "1337": {
-      "address": "0x7bB32dCC938941460A15e3aceE35f2F281d5C64d",
+      "address": "0x878a049752a5f1dB7a62e2cCa2B282C229226dF4",
       "transactionHash": "0x071a44147e99cbdc24b0f27e8b2ecc9ae99f25d7f46b93ec513df735e492dfac"
+    },
+    "11155111": {
+      "address": "0x79Bd6DCb15Ca2b0B0abe5EAa1A7bCBD2d5d379E7",
+      "transactionHash": "0x5d3b8ea4cb6cc63aa7c6711e2d32dda0469d997a3f3e6671be5431eb4881ef25"
     }
   }
 }
