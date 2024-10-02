@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import Voting from "./Voting.json";
+import ReactMarkdown from "react-markdown";
 
 const VotingDApp = () => {
   const [account, setAccount] = useState("");
@@ -9,6 +10,7 @@ const VotingDApp = () => {
   const [contract, setContract] = useState(null);
   const [voters, setVoters] = useState([]);
   const [showInfo, setShowInfo] = useState(false); // control if the info is folded
+  const [markdownContent, setMarkdownContent] = useState("");
 
   const loadBlockchainData = async () => {
     // Check if MetaMask is installed
@@ -134,6 +136,15 @@ const VotingDApp = () => {
     loadBlockchainData();
   }, []);
 
+  useEffect(() => {
+    if (showInfo) {
+      fetch("/README.md") // loading Markdown file
+        .then((response) => response.text())
+        .then((text) => setMarkdownContent(text))
+        .catch((error) => console.error("Error loading markdown file:", error));
+    }
+  }, [showInfo]);
+
   return (
     <div>
       <h1>Voting DApp</h1>
@@ -143,6 +154,7 @@ const VotingDApp = () => {
       {showInfo && (
         <div
           style={{
+            textIndent: "2em",
             textAlign: "justify",
             maxWidth: "700px",
             margin: "0 auto",
@@ -152,48 +164,71 @@ const VotingDApp = () => {
             color: "#333", // font color
           }}
         >
-          <p>
-            This DApp allows users to vote for candidates in a decentralized way
-            on a Testnet. <br />
-            For using this DApp, you need to deploy the 《Voting》smart contract
-            to Ganache Testnet and finish a series of settings. If it is not
-            convenient for you, you can simply check the Demo Video on: [link]{" "}
-            <br />I also finished a Sepolia version of this DApp. However, since
-            I do not have so many accounts to test, the functions might be
-            limited, so I did not uploaded it as a webpage. Anyway, if you would
-            like to challenge the GANACHE settings, Please follow the steps
-            below. <br />
-            <strong>1.</strong> Install Ganache, create a workspace, pick up an
-            account and memorize its private key. <br />
-            <strong>2.</strong> Deploy the smart contract to Ganache testnet.
-            You may have many approaches to finish this step. However, I am
-            using Foundry for deploying. You can find my foundry project
-            "foundry-voting" at https://github.com/monmon-sitdown/SimpleVoting.
-            Initialize the foundry project, set the .env file of GANACHE_KEY to
-            the private key you just picked up, and run "make deploy" in your
-            terminal. You can deploy the smart contract to your own ganache
-            network. <br />
-            <strong>3.</strong> Find React App in
-            https://github.com/monmon-sitdown/voting-dapp . Revise the
-            src/Voting.json file. Change the "1337 address" to the contract
-            address that you just deployed, and npm start to run the React App
-            on localhost:3000.
-            <br />
-            <strong>4.</strong> You may need to set an account in your Web3
-            wallet. After you connect your MetaMask wallet to the Ganache
-            network, the current candidates will be displayed along with their
-            respective vote counts. Ensure that you are connected to the correct
-            network before proceeding! <br />
-            <strong>5.</strong> You can vote for anyone you want. The candidates
-            list was previously set onto the smart contract by node.js code.
-            After you click the vote button, it will try to connect to your Web3
-            wallet, and you can vote after you pay the gas fee. <br />
-            <strong>6.</strong> Once you cast your vote, the system will prevent
-            you from voting again to maintain fairness. <br />
-            <strong>7.</strong> Click the "Show Voters Information" button, and
-            you can check who voted for which candidate using their wallet
-            address.
-          </p>
+          <div>
+            <p
+              style={{
+                textIndent: "2em", // 设置首行缩进为2个字符宽
+                textAlign: "justify", // 使文本两端对齐
+              }}
+            >
+              This DApp allows users to vote for candidates in a decentralized
+              way on a Testnet.
+            </p>
+            <p
+              style={{
+                textIndent: "2em",
+                textAlign: "justify",
+              }}
+            >
+              For using this DApp, you need to deploy the 《Voting》smart
+              contract to Ganache Testnet and finish a series of settings. (I
+              also finished a Sepolia version of this DApp. However, since I do
+              not have so many accounts to test, the functions might be limited,
+              so I did not upload it.)
+            </p>
+            <p
+              style={{
+                textIndent: "2em",
+                textAlign: "justify",
+              }}
+            >
+              If it is not convenient for you, you can simply check the Demo
+              Video on:{" "}
+              <a
+                href="YOUR_DEMO_VIDEO_URL"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Demo Video
+              </a>
+            </p>
+            <p
+              style={{
+                textIndent: "2em",
+                textAlign: "justify",
+              }}
+            >
+              If you would like to challenge the GANACHE settings, Please check{" "}
+              <a
+                href="https://github.com/monmon-sitdown/voting-dapp/blob/master/README.md"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                README.md
+              </a>{" "}
+              or follow the steps below. You can also find my{" "}
+              <a
+                href="https://github.com/monmon-sitdown/voting-dapp/tree/master"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                CODE
+              </a>{" "}
+              in github.
+            </p>
+          </div>
+
+          <ReactMarkdown>{markdownContent}</ReactMarkdown>
         </div>
       )}
 

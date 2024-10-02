@@ -108,8 +108,8 @@ This file contains the ABI and network details for the smart contract. It's esse
 
 ### Usage
 
-- **Voting:** Select a candidate and click the "Vote" button. The transaction will be sent to the Ethereum network, and the vote count will update upon success.
-- **View Voters**: Click "Show Voters" to see who has voted and which candidate they supported.
+**Voting:** Select a candidate and click the "Vote" button. The transaction will be sent to the Ethereum network, and the vote count will update upon success.
+**View Voters**: Click "Show Voters" to see who has voted and which candidate they supported.
 
 ### Troubleshooting
 
