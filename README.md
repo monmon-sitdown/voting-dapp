@@ -1,20 +1,20 @@
-# Voting DApp Front-End
+# Voting DApp Documentation
 
-This project is a front-end React application that interacts with a Solidity smart contract to facilitate a decentralized voting system. The app allows users to view candidates, cast votes, and view voting results.
+This project is a front-end React application that interacts with a Solidity smart contract, enabling a decentralized voting system. Users can view candidates, cast votes, and check voter information on the blockchain network.
 
 ## Features
 
-1. **Connect to Blockchain**: Automatically connects to the Ethereum blockchain using a provider (e.g., Ganache or Sepolia Testnet).
-2. **Display Candidates**: Fetches and displays a list of candidates from the smart contract.
-3. **Vote**: Allows users to vote for their chosen candidate. Each user can only vote once.
-4. **Display Voters**: Shows a list of voters and the candidates they voted for.
+1. **Decentralized Voting**: Allows users to vote for candidates in a decentralized manner on a Testnet.
+2. **Multiple Networks**: The app can be deployed on both Ganache Testnet and Sepolia Testnet. Due to limited testing accounts, the Sepolia version is not deployed as a webpage.
+3. **Voter Information Display**: Provides a list of voters and the candidates they supported.
+4. **Fair Voting**: Ensures each user can only vote once per candidate.
 
 ## Prerequisites
 
-Before you begin, ensure you have met the following requirements:
+Before you begin, ensure the following tools and services are set up before proceeding:
 
-- Node.js and npm installed on your machine.
-- A local Ethereum blockchain running (e.g., Ganache).
+- **Node.js** and **npm** installed on your machine.
+- A local Ethereum blockchain running (e.g., **Ganache**).
 - A deployed instance of the `Voting.sol` smart contract.
 
 ## Getting Started
@@ -24,8 +24,8 @@ Follow these steps to set up and run the project locally.
 ### 1.Clone the Repository
 
 ```
-git clone https://github.com/your-username/voting-dapp-frontend.git
-cd voting-dapp-frontend
+git clone https://github.com/monmon-sitdown/voting-dapp.git
+cd voting-dapp
 ```
 
 ### 2. Install Dependencies
@@ -34,27 +34,59 @@ cd voting-dapp-frontend
 npm install
 ```
 
-### 3. Configure the App
+### 3. Deploy Smart Contract
 
-In src/vote.js, update the provider and contract information to match your local setup:
+- Install **Ganache**, create a workspace, and select an account. Memorize its private key.
+- Deploy the `Voting` smart contract using your preferred method. We recommend using **Foundry** for deployment.
+- Set the .env file with the private key from Ganache and run the deployment command.
 
 ```
-const provider = new ethers.providers.JsonRpcProvider("http://localhost:7545");
+git clone https://github.com/monmon-sitdown/SimpleVoting.git
+cd SimpleVoting
+make deploy
 ```
 
-### 4.Start the App
+### 4. Configure the App
+
+In the src/Voting.json file, update the contract address to match the one you deployed to Ganache:
+
+```
+{
+  "1337": {
+    "address": "YOUR_DEPLOYED_CONTRACT_ADDRESS"
+  }
+}
+```
+
+### 5.Start the App
 
 ```
 npm start
 ```
 
-The application will be available at http://localhost:3000.
+This will start the application at http://localhost:3000.
+
+### 6.Connect to MetaMask
+
+Connect your MetaMask wallet to the **Ganache Testnet**. The DApp will display the candidates and their respective vote counts.
+
+### 7. Cast Your Vote
+
+Users can vote for a candidate by clicking the "vote" button. Ensure you're connected to the correct network. Once a vote is cast, the system will prevent further votes to maintain fairness.
+
+### 8. View Voter Information
+
+Click "Show Voter Information" to see a list of voters and their selected candidates.
 
 ## Main Components
 
-### `vote.js`
+### `src/vote.js`
 
 This is the primary file where the React component for the Voting DApp is implemented. Key features include:
+
+- **`loadBlockchainData`**: Connects to the blockchain and retrieves candidate data.
+- **`voteCandidate`**: Sends a transaction to the contract, allowing users to vote.
+- **`loadVotersData`**: Fetches and displays voter information.
 
 #### State Management:
 
@@ -64,12 +96,6 @@ This is the primary file where the React component for the Voting DApp is implem
 - **`provider`** : The ethers.js provider instance.
 - **`votes`**: The list of voters and their votes.
 - **`loading`**: A flag to manage the loading state.
-
-#### Functions
-
-- **`loadBloackchainData`**:Connects to the blockchain, retrieves candidates and initializes the state.
-- **`voteCandidate`**: Allows a user to vote for a candidate.
-- **`loadVotersData`**: Fetches and displays information about the voters.
 
 #### Rendering
 
@@ -88,4 +114,4 @@ This file contains the ABI and network details for the smart contract. It's esse
 ### Troubleshooting
 
 - **Contract Not Found:** Ensure that the Voting.sol contract is deployed to the same network that your React app is connected to. Check the network ID and contract address in `Voting.json`.
-- **Failed Transactions:** Ensure that your local blockchain is running and that the contract has sufficient gas to process transactions.
+- **Connection Issues:** Check that your local blockchain is running and your MetaMask wallet is connected to the correct network.
