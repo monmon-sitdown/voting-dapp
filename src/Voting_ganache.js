@@ -32,7 +32,6 @@ const VotingDApp = () => {
   ];
 
   const loadBlockchainData = async () => {
-    // 连接到Ganache
     /*
     const provider = new ethers.providers.JsonRpcProvider(
       "http://localhost:7545"
@@ -120,17 +119,15 @@ const VotingDApp = () => {
     try {
       setLoading(true);
       const tx = await contract.vote(candidateId);
-      await tx.wait(); // 等待交易确认
+      await tx.wait();
       setLoading(false);
       alert("投票成功");
       loadBlockchainData();
     } catch (error) {
       console.error("Error voting for candidate:", error);
 
-      // 提取合约抛出的错误信息
       const errorMessage = error.message || "投票失败";
 
-      // 检查错误信息是否包含特定的失败原因
       if (errorMessage.includes("You have already voted")) {
         alert("投票失败，原因：不能重复投票");
       } else {

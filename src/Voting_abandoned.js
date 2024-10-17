@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import Voting from "./Voting.json";
+import ReactMarkdown from "react-markdown";
 
 const VotingDApp = () => {
   const [account, setAccount] = useState("");
@@ -9,7 +10,7 @@ const VotingDApp = () => {
   const [contract, setContract] = useState(null);
   const [voters, setVoters] = useState([]);
   const [showInfo, setShowInfo] = useState(false); // control if the info is folded
-  //const [markdownContent, setMarkdownContent] = useState("");
+  const [markdownContent, setMarkdownContent] = useState("");
 
   const loadBlockchainData = async () => {
     // Check if MetaMask is installed
@@ -135,14 +136,14 @@ const VotingDApp = () => {
     loadBlockchainData();
   }, []);
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (showInfo) {
       fetch("/README.md") // loading Markdown file
         .then((response) => response.text())
         .then((text) => setMarkdownContent(text))
         .catch((error) => console.error("Error loading markdown file:", error));
     }
-  }, [showInfo]);*/
+  }, [showInfo]);
 
   return (
     <div>
@@ -179,7 +180,7 @@ const VotingDApp = () => {
                 textAlign: "justify",
               }}
             >
-              For using this DApp, you need to deploy the 【Voting】smart
+              For using this DApp, you need to deploy the 《Voting》smart
               contract to Ganache Testnet and finish a series of settings. (I
               also finished a Sepolia version of this DApp. However, since I do
               not have so many accounts to test, the functions might be limited,
@@ -194,7 +195,7 @@ const VotingDApp = () => {
               If it is not convenient for you, you can simply check the Demo
               Video on:{" "}
               <a
-                href="DEMO_VIDEO_URL"
+                href="YOUR_DEMO_VIDEO_URL"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -221,19 +222,13 @@ const VotingDApp = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                【React code】
-              </a>{" "}
-              and{" "}
-              <a
-                href="https://github.com/monmon-sitdown/SimpleVoting/tree/master/foundry-voting"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                【Solidity code】
+                CODE
               </a>{" "}
               in github.
             </p>
           </div>
+
+          <ReactMarkdown>{markdownContent}</ReactMarkdown>
         </div>
       )}
 
