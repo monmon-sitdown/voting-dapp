@@ -166,8 +166,8 @@ const VotingDApp = () => {
           <div>
             <p
               style={{
-                textIndent: "2em", // 设置首行缩进为2个字符宽
-                textAlign: "justify", // 使文本两端对齐
+                textIndent: "2em", // Set the first-line indentation to be 2 characters.
+                textAlign: "justify",
               }}
             >
               This DApp allows users to vote for candidates in a decentralized
@@ -179,11 +179,11 @@ const VotingDApp = () => {
                 textAlign: "justify",
               }}
             >
-              For using this DApp, you need to deploy the 【Voting】smart
-              contract to Ganache Testnet and finish a series of settings. (I
-              also finished a Sepolia version of this DApp. However, since I do
-              not have so many accounts to test, the functions might be limited,
-              so I did not upload it.)
+              For using this DApp, you need to deploy the [Voting]smart contract
+              to Ganache Testnet and finish a series of settings. (I also
+              finished a Sepolia version of this DApp. However, since I do not
+              have so many accounts to test, the functions might be limited, so
+              I did not upload it.)
             </p>
             <p
               style={{
@@ -194,7 +194,7 @@ const VotingDApp = () => {
               If it is not convenient for you, you can simply check the Demo
               Video on:{" "}
               <a
-                href="DEMO_VIDEO_URL"
+                href="https://youtu.be/ZDsixEww27E"
                 target="_blank"
                 rel="noopener noreferrer"
               >
